@@ -7,10 +7,10 @@ import sys
 
 def webServer(port=13331):
   serverSocket = socket(AF_INET, SOCK_STREAM)
-  host = "127.0.0.1"
+  # host = "127.0.0.1"
   
   #Prepare a server socket
-  serverSocket.bind((host, port))
+  serverSocket.bind(("", port))
   
   #Fill in start
   serverSocket.listen()
@@ -29,23 +29,23 @@ def webServer(port=13331):
       
       #opens the client requested file. 
       #Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
-      f = open(filename[1:], "r")
-      content = ""
+      f = open(filename[1:])
+      content = f.read()
 
       #This variable can store the headers you want to send for any valid or invalid request.   What header should be sent for a response that is ok?
       #Fill in start 
               
       #Content-Type is an example on how to send a header as bytes. There are more!
-      outputdata = b"Content-Type: text/html; charset=UTF-8\r\n Server: \r\n  Connection: closed\r\n\r\n"
+      outputdata = b"Content-Type: text/html; charset=UTF-8\r\n  Connection: open\r\n\r\n"
 
 
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
  
       #Fill in end
                
-      for i in f: #for line in file
+      # for i in f: #for line in file
       #Fill in start - append your html file contents #Fill in end
-        content += i.rstrip()
+        # content += i.rstrip()
         
       #Send the content of the requested file to the client (don't forget the headers you created)!
       #Send everything as one send command, do not send one line/item at a time!
