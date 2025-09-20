@@ -13,7 +13,7 @@ def webServer(port=13331):
   serverSocket.bind(("", port))
   
   #Fill in start
-  serverSocket.listen()
+  serverSocket.listen(1)
 
   #Fill in end
 
@@ -30,7 +30,6 @@ def webServer(port=13331):
       #opens the client requested file. 
       #Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
       f = open(filename[1:])
-      content = f.read()
 
       #This variable can store the headers you want to send for any valid or invalid request.   What header should be sent for a response that is ok?
       #Fill in start 
@@ -42,21 +41,18 @@ def webServer(port=13331):
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
  
       #Fill in end
-               
-      # for i in f: #for line in file
+      connectionSocket.send("HTTP/1.0 200 OK\r\n".encode())
+      connectionSocket.send("Content-Type: text/html\r\n".encode())
+      content = ""
       #Fill in start - append your html file contents #Fill in end
-        # content += i.rstrip()
-        
+      for i in f: #for line in file
+          content = content + i + "\r\n"
+          print(content)
+
+      content += "\r\n"
+      connectionSocket.send(content.encode())
       #Send the content of the requested file to the client (don't forget the headers you created)!
       #Send everything as one send command, do not send one line/item at a time!
-
-      # Fill in start
-      response = "HTTP/1.1 200 OK\r\n"
-      response += outputdata
-      connectionSocket.send(response.encode('utf-8'))
-
-
-
 
       # Fill in end
         
@@ -68,8 +64,9 @@ def webServer(port=13331):
       #Fill in start
 
       #Fill in end
-      response = "HTTP/1.1 400 Bad Request\r\n"
-      connectionSocket.sendall(response.encode('utf-8'))
+      connectionSocket.send('HTTP/1.0 404 NOT FOUND\r\n'.encode())
+      connectionSocket.send("Content-Type: text/html\r\n".encode())
+      connectionSocket.close()
 
       #Close client socket
       #Fill in start
@@ -79,7 +76,7 @@ def webServer(port=13331):
   # Commenting out the below (some use it for local testing). It is not required for Gradescope, and some students have moved it erroneously in the While loop. 
   # DO NOT PLACE ANYWHERE ELSE AND DO NOT UNCOMMENT WHEN SUBMITTING, YOU ARE GONNA HAVE A BAD TIME
   #serverSocket.close()
-  #sys.exit()  # Terminate the program after sending the corresponding data
+    sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
   webServer(13331)
