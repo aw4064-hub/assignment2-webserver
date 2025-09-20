@@ -35,10 +35,8 @@ def webServer(port=13331):
       #Fill in start 
               
       #Content-Type is an example on how to send a header as bytes. There are more!
-      header = "Content-Type: text/html; charset=UTF-8\r\n Connection: Keep-Alive\r\n Server: Apache\r\n\r\n"
+      header = "Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache\r\n"
       status = "HTTP/1.1 200 OK\r\n"
-      # outputdata = outputdata + "HTTP/1.0 200 OK\r\n"
-
       #Note that a complete header must end with a blank line, creating the four-byte sequence "\r\n\r\n" Refer to https://w3.cs.jmu.edu/kirkpams/OpenCSF/Books/csf/html/TCPSockets.html
  
       #Fill in end
@@ -81,7 +79,7 @@ def webServer(port=13331):
   # Commenting out the below (some use it for local testing). It is not required for Gradescope, and some students have moved it erroneously in the While loop. 
   # DO NOT PLACE ANYWHERE ELSE AND DO NOT UNCOMMENT WHEN SUBMITTING, YOU ARE GONNA HAVE A BAD TIME
   #serverSocket.close()
-    # sys.exit()  # Terminate the program after sending the corresponding data
+    sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
   webServer(13331)
