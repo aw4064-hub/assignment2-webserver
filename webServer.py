@@ -67,7 +67,7 @@ def webServer(port=13331):
       #Fill in start
 
       #Fill in end
-      content =  "Content-Type: text/html; charset=UTF-8\r\n\r\n"
+      content = "HTTP/1.0 404 NOT FOUND\r\n Content-Type: text/html\r\n\r\n"
       # connectionSocket.send('HTTP/1.0 404 NOT FOUND\r\n'.encode())
       # connectionSocket.send("Content-Type: text/html\r\n".encode())
       connectionSocket.send(content.encode())
