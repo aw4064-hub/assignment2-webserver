@@ -35,7 +35,7 @@ def webServer(port=13331):
       #Fill in start 
               
       #Content-Type is an example on how to send a header as bytes. There are more!
-      header = "Content-Type: text/html; charset=UTF-8; Connection: Keep-Alive; Server: Apache\r\n"
+      header = "Content-Type: text/html; charset=UTF-8\r\n Connection: Keep-Alive\r\n Server: Apache\r\n"
       status = "HTTP/1.1 200 OK\r\n"
       # outputdata = outputdata + "HTTP/1.0 200 OK\r\n"
 
